@@ -35,7 +35,7 @@ env:
   ECR_REPOSITORY: webapp/my-repo           # set this to your Amazon ECR repository name
   ECS_SERVICE: MY_ECS_SERVICE                 # set this to your Amazon ECS service name
   ECS_CLUSTER: kurtcluster                # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: public.ecr.aws/m5x5e4o2/webapp/my-repo# set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: public.ecr.aws/m5x5e4o2/webapp/my-repo # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: web        # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
@@ -81,8 +81,8 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ${{ env.ECS_TASK_DEFINITION }}
-        container-name: ${{ env.CONTAINER_NAME }}
+        task-definition: ${{ env.public.ecr.aws/m5x5e4o2/webapp/my-repo }}
+        container-name: ${{ env.web }}
         image: ${{ steps.build-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
@@ -90,5 +90,5 @@ jobs:
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: ${{ env.ECS_SERVICE }}
-        cluster: ${{ env.ECS_CLUSTER }}
+        cluster: ${{ env.kubrtcluster}}
         wait-for-service-stability: true
